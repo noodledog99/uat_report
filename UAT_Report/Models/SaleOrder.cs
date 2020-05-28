@@ -12,7 +12,7 @@ namespace UAT_Report.Models
         public string SOId { get; set; }
         public DateTime SODate { get; set; }
         public string Status { get; set; }
-        public int SONumber { get; set; }
+        public string SONumber { get; set; }
         public string Description { get; set; }
         public string OwnerService { get; set; }
         public string SubServiceName { get; set; }

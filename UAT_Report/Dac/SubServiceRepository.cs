@@ -24,7 +24,7 @@ namespace UAT_Report.Dac
         public SubService Get(Expression<Func<SubService, bool>> expression)
             => collection.Find(expression).FirstOrDefault();
 
-        public IEnumerable<SubService> GetAllSaleOrder()
+        public IEnumerable<SubService> GetAllSubService()
             => collection.Find(it => true).ToList();
 
         public void Update(SubService document)

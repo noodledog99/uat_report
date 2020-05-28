@@ -1,9 +1,61 @@
-﻿
+﻿@model UAT_Report.Models.SaleOrder
+
 @{
     ViewData["Title"] = "SaleOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>SaleOrder</h1>
+<h1>Sale Order</h1>
 
+<form>
+    <div class="form-group">
+        <label for="SODate">Sale Order Date</label>
+        <input type="date" asp-for="SODate" name="soDate" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <input type="text" asp-for="Status" name="status" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="SONumber">Sale Order Number</label>
+        <input type="text" asp-for="SONumber" name="soNumber" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" asp-for="Description" name="decription" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="OwnerService">Owner Service</label>
+        <select type="text" asp-for="OwnerService" name="ownerService" id="ownerService" asp-items="ViewBag.OwnerService" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label for="SubServiceName">Sub Service Name</label>
+        <select type="text" asp-for="SubServiceName" name="subServiceName" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label for="CustomerNo">Customer No</label>
+        <input type="text" asp-for="CustomerNo" name="customerNo" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="CustomerName">Customer Name</label>
+        <input type="text" asp-for="CustomerName" name="customerName" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="StartingDate">Starting Date</label>
+        <input type="date" asp-for="StartingDate" name="startingDate" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="EndingDate">Ending Date</label>
+        <input type="date" asp-for="EndingDate" name="endingDate" class="form-control">
+    </div>
+</form>
 
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ownerService").click(function () {
+                console.log($(this).val())
+            });
+        });
+    </script>
+}
