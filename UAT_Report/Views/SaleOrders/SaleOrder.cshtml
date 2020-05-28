@@ -30,7 +30,9 @@
     </div>
     <div class="form-group">
         <label for="SubServiceName">Sub Service Name</label>
-        <select type="text" asp-for="SubServiceName" name="subServiceName" class="form-control"></select>
+        <select type="text" asp-for="SubServiceName" id="subServiceName" name="subServiceName" class="form-control">
+            <option>--- Select ---</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="CustomerNo">Customer No</label>
@@ -53,9 +55,19 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#ownerService").click(function () {
-                console.log($(this).val())
+            $("#ownerService").change(function (e) {
+                e.preventDefault()
+                var ownerName = $(this).val();
+                var url = '@Url.Action("GetSelectSubServices", "SaleOrders")'
+                $.get(url, { owner: ownerName }).then((res) => {
+                    $('#subServiceName').empty().append('<option>--- Select ---</option>');
+                    $.each(res, function (data, value) {
+                        console.log(value)
+                        $('#subServiceName').append($('<option></option>').val(value).html(value))
+                    });
+                })
             });
         });
+
     </script>
 }

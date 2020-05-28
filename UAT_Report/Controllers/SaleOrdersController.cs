@@ -20,21 +20,36 @@ namespace UAT_Report.Controllers
 
         public IActionResult SaleOrder()
         {
-            var ownerServices = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
+            var ownerServicesSelectList = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
             var ownerServiceLst = collectionSubService
                 .GetAllSubService()
                 .Select(it => it.OwnerServiceName)
                 .Distinct()
                 .ToList();
 
-            ownerServiceLst.ForEach(it => ownerServices.Add(new SelectListItem { Text = it, Value = it }));
-            ViewBag.OwnerService = ownerServices;
+            ownerServiceLst.ForEach(it => ownerServicesSelectList.Add(new SelectListItem { Text = it, Value = it }));
+            ViewBag.OwnerService = ownerServicesSelectList;
             return View();
         }
 
-        //public IActionResult GetSelectSubServices(string owner)
-        //{
-
-        //}
+        [HttpGet]
+        public IActionResult GetSelectSubServices(string owner)
+        {
+            var subServiceLst = new List<object>();
+            var subServices = collectionSubService.GetAllSubService()
+                .Where(it => it.OwnerServiceName == owner)
+                .Select(it => it.SubServiceName)
+                .Distinct()
+                .ToList();
+            subServices.ForEach(it => subServiceLst
+            .Add(
+                new
+                {
+                    Text = it,
+                    Value = it
+                })
+            );
+            return Json(subServices);
+        }
     }
 }
