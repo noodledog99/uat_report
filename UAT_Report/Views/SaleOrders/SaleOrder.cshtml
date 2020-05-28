@@ -5,28 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Sale Order</h1>
+<h1>Insert SO UAT</h1>
 
-<form>
+<form asp-action="SaleOrder" method="post">
     <div class="form-group">
-        <label for="SODate">Sale Order Date</label>
-        <input type="date" asp-for="SODate" name="soDate" class="form-control">
+        <div class="col-md-10">
+            <label for="SODate">Date</label>
+            <input type="date" asp-for="SODate" name="date" class="form-control">
+        </div>
     </div>
     <div class="form-group">
-        <label for="Status">Status</label>
-        <input type="text" asp-for="Status" name="status" class="form-control">
+        <div class="col-md-10">
+            <label for="Status">Status</label>
+            <select class="form-control" id="Status">
+                <option>New Customer</option>
+                <option>New service</option>
+                <option>Renewal</option>
+                <option>Renewal and Change</option>
+                <option>Change New Customer</option>
+                <option>Change</option>
+                <option>Terminate Service</option>
+                <option>Terminate Customer</option>
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label for="SONumber">Sale Order Number</label>
-        <input type="text" asp-for="SONumber" name="soNumber" class="form-control">
+        <div class="col-md-10">
+            <label for="SONumber">SO No</label>
+            <input type="text" asp-for="SONumber" name="soNumber" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="Description">Description</label>
+            <input type="text" asp-for="Description" name="description" class="form-control">
+        </div>
     </div>
     <div class="form-group">
-        <label for="Description">Description</label>
-        <input type="text" asp-for="Description" name="decription" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="OwnerService">Owner Service</label>
-        <select type="text" asp-for="OwnerService" name="ownerService" id="ownerService" asp-items="ViewBag.OwnerService" class="form-control"></select>
+        <div class="col-md-10">
+            <label for="OwnerService">OwnerService</label>
+            <select type="text" asp-for="OwnerService" name="ownerService" id="ownerService" asp-items="ViewBag.OwnerService" class="form-control"></select>
+        </div>
     </div>
     <div class="form-group">
         <label for="SubServiceName">Sub Service Name</label>
@@ -35,21 +55,32 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="CustomerNo">Customer No</label>
-        <input type="text" asp-for="CustomerNo" name="customerNo" class="form-control">
+        <div class="col-md-10">
+            <label for="CustomerNo">Customer No</label>
+            <input type="text" asp-for="CustomerNo" name="customerNo" class="form-control">
+        </div>
     </div>
     <div class="form-group">
-        <label for="CustomerName">Customer Name</label>
-        <input type="text" asp-for="CustomerName" name="customerName" class="form-control">
+        <div class="col-md-10">
+            <label for="CustomerName">Customer Name No</label>
+            <input type="text" asp-for="CustomerName" name="customerName" class="form-control">
+        </div>
     </div>
     <div class="form-group">
-        <label for="StartingDate">Starting Date</label>
-        <input type="date" asp-for="StartingDate" name="startingDate" class="form-control">
+        <div class="col-md-10">
+            <label for="StartingDate">Starting Date</label>
+            <input type="date" asp-for="StartingDate" name="startingDate" class="form-control">
+        </div>
     </div>
     <div class="form-group">
-        <label for="EndingDate">Ending Date</label>
-        <input type="date" asp-for="EndingDate" name="endingDate" class="form-control">
+        <div class="col-md-10">
+            <label for="EndingDate">Starting Date</label>
+            <input type="date" asp-for="EndingDate" name="endingDate" class="form-control">
+        </div>
     </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <button class="btn btn-primary">Cancel</button>
+
 </form>
 
 @section Scripts{

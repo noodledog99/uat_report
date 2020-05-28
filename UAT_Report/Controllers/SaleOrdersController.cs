@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UAT_Report.Dac;
+using UAT_Report.Models;
 
 namespace UAT_Report.Controllers
 {
@@ -20,15 +21,25 @@ namespace UAT_Report.Controllers
 
         public IActionResult SaleOrder()
         {
-            var ownerServicesSelectList = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
+            var ownerServiceSelectList = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
             var ownerServiceLst = collectionSubService
                 .GetAllSubService()
                 .Select(it => it.OwnerServiceName)
                 .Distinct()
                 .ToList();
+            ownerServiceLst.ForEach(it => ownerServiceSelectList.Add(new SelectListItem { Text = it, Value = it }));
+            ViewBag.OwnerService = ownerServiceSelectList;
+            return View();
+        }
 
-            ownerServiceLst.ForEach(it => ownerServicesSelectList.Add(new SelectListItem { Text = it, Value = it }));
-            ViewBag.OwnerService = ownerServicesSelectList;
+        [HttpPost]
+        public IActionResult SaleOrder(SaleOrder model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.SOId = Guid.NewGuid().ToString();
+                collectionSaleOrder.Create(model);
+            }
             return View();
         }
 

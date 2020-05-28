@@ -13,5 +13,6 @@ namespace UAT_Report.Dac
         SubService Get(Expression<Func<SubService, bool>> expression);
         void Create(SubService document);
         void Update(SubService document);
+        void Create(SaleOrder model);
     }
 }
