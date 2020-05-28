@@ -21,6 +21,11 @@ namespace UAT_Report.Dac
         public void Create(SubService document)
             => collection.InsertOne(document);
 
+        public void Create(SaleOrder model)
+        {
+            throw new NotImplementedException();
+        }
+
         public SubService Get(Expression<Func<SubService, bool>> expression)
             => collection.Find(expression).FirstOrDefault();
 
@@ -34,5 +39,7 @@ namespace UAT_Report.Dac
                .Set(it => it.SubServiceName, document.SubServiceName);
             collection.UpdateOne(it => it.SubServiceId == document.SubServiceId, def);
         }
+
+      
     }
 }
