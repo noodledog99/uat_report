@@ -21,30 +21,17 @@ namespace UAT_Report.Controllers
 
         public IActionResult SaleOrder()
         {
-           
-            var ownerServices = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
+            var ownerServiceSelectList = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
             var ownerServiceLst = collectionSubService
                 .GetAllSubService()
                 .Select(it => it.OwnerServiceName)
                 .Distinct()
                 .ToList();
-
-
-            ownerServiceLst.ForEach(it => ownerServices.Add(new SelectListItem { Text = it, Value = it }));
-            ViewBag.OwnerService = ownerServices;
-
-            var subServices = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
-            var SubServiceList = collectionSubService
-                .GetAllSubService()
-                .Select(i => i.SubServiceName)
-                .Distinct()
-                .ToList();
-
-            SubServiceList.ForEach(i => subServices.Add(new SelectListItem { Text = i, Value = i }));
-            ViewBag.SubService = subServices ;
-            
+            ownerServiceLst.ForEach(it => ownerServiceSelectList.Add(new SelectListItem { Text = it, Value = it }));
+            ViewBag.OwnerService = ownerServiceSelectList;
             return View();
         }
+
         [HttpPost]
         public IActionResult SaleOrder(SaleOrder model)
         {
@@ -53,14 +40,27 @@ namespace UAT_Report.Controllers
                 model.SOId = Guid.NewGuid().ToString();
                 collectionSaleOrder.Create(model);
             }
-
-
             return View();
         }
 
-        //public IActionResult GetSelectSubServices(string owner)
-        //{
-
-        //}
+        [HttpGet]
+        public IActionResult GetSelectSubServices(string owner)
+        {
+            var subServiceLst = new List<object>();
+            var subServices = collectionSubService.GetAllSubService()
+                .Where(it => it.OwnerServiceName == owner)
+                .Select(it => it.SubServiceName)
+                .Distinct()
+                .ToList();
+            subServices.ForEach(it => subServiceLst
+            .Add(
+                new
+                {
+                    Text = it,
+                    Value = it
+                })
+            );
+            return Json(subServices);
+        }
     }
 }
