@@ -22,11 +22,9 @@ namespace UAT_Report.Models
         public string SubServiceName { get; set; }
         public string CustomerNo { get; set; }
         public string CustomerName { get; set; }
-
-        
+   
         public DateTime StartingDate { get; set; }
 
-        
         public DateTime EndingDate { get; set; }
         
     }

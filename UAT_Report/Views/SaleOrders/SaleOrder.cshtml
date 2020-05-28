@@ -11,7 +11,7 @@
     <div class="form-group">
         <div class="col-md-10">
             <label for="SODate">Date</label>
-            <input type="text" asp-for="SODate" name="date" class="form-control">
+            <input type="date" asp-for="SODate" name="date" class="form-control">
         </div>
     </div>
     <div class="form-group">
@@ -45,14 +45,13 @@
     <div class="form-group">
         <div class="col-md-10">
             <label for="OwnerService">OwnerService</label>
-            <input type="text" asp-for="OwnerService" name="ownerService" class="form-control">
+            <select type="text" asp-for="OwnerService" name="ownerService" id="ownerService" asp-items="ViewBag.OwnerService" class="form-control"></select>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-10">
-            <label for="SubServiceName">Service Name</label>
-          
-            <input type="text" asp-for="SubServiceName" name="subServiceName" class="form-control">
+            <label for="SubServiceName">Sub Service Name</label>
+            <select type="text" asp-for="SubServiceName"  id="subService" name="subService" asp-items="ViewBag.SubService" class="form-control" > </select>
         </div>
     </div>
     <div class="form-group">
@@ -70,13 +69,13 @@
     <div class="form-group">
         <div class="col-md-10">
             <label for="StartingDate">Starting Date</label>
-            <input type="text" asp-for="StartingDate" name="startingDate" class="form-control">
+            <input type="date" asp-for="StartingDate" name="startingDate" class="form-control">
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-10">
             <label for="EndingDate">Starting Date</label>
-            <input type="text" asp-for="EndingDate" name="endingDate" class="form-control">
+            <input type="date" asp-for="EndingDate" name="endingDate" class="form-control">
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
