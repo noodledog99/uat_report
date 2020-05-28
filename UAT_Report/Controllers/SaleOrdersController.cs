@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UAT_Report.Dac;
+using UAT_Report.Models;
 
 namespace UAT_Report.Controllers
 {
@@ -44,8 +45,19 @@ namespace UAT_Report.Controllers
             
             return View();
         }
+        [HttpPost]
+        public IActionResult SaleOrder(SaleOrder model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.SOId = Guid.NewGuid().ToString();
+                collectionSaleOrder.Create(model);
+            }
 
-      
+
+            return View();
+        }
+
         //public IActionResult GetSelectSubServices(string owner)
         //{
 
