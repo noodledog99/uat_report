@@ -9,7 +9,7 @@ namespace UAT_Report.Dac
 {
     public interface ISubServiceRepository
     {
-        IEnumerable<SubService> GetAllSaleOrder();
+        IEnumerable<SubService> GetAllSubService();
         SubService Get(Expression<Func<SubService, bool>> expression);
         void Create(SubService document);
         void Update(SubService document);

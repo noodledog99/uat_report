@@ -4,40 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using UAT_Report.Dac;
-using UAT_Report.Models;
 
 namespace UAT_Report.Controllers
 {
     public class SaleOrdersController : Controller
     {
-        private readonly ISubServiceRepository collection;
-
-        public SaleOrdersController(ISubServiceRepository collection)
+        private readonly ISaleOrderRepository collectionSaleOrder;
+        private readonly ISubServiceRepository collectionSubService;
+        public SaleOrdersController(ISaleOrderRepository collectionSaleOrder, ISubServiceRepository collectionSubService)
         {
-            this.collection = collection;
+            this.collectionSaleOrder = collectionSaleOrder;
+            this.collectionSubService = collectionSubService;
         }
+
         public IActionResult SaleOrder()
         {
+            var ownerServices = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
+            var ownerServiceLst = collectionSubService
+                .GetAllSubService()
+                .Select(it => it.OwnerServiceName)
+                .Distinct()
+                .ToList();
+
+            ownerServiceLst.ForEach(it => ownerServices.Add(new SelectListItem { Text = it, Value = it }));
+            ViewBag.OwnerService = ownerServices;
             return View();
         }
-        [HttpGet]
-        public IActionResult SaleOrder(int? id)
-        {
-          
-            return View();
-        }
-        [HttpPost]
-        public IActionResult SaleOrder(SaleOrder model)
-        {
-            if(ModelState.IsValid)
-            {
-                model.SOId = Guid.NewGuid().ToString();
-                collection.Create(model);
-            }
-            //ViewBag.Status = new SelectList(model.Status);
-            return View();
-        }
+
+        //public IActionResult GetSelectSubServices(string owner)
+        //{
+
+        //}
     }
 }

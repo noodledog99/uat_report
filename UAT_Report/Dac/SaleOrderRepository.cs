@@ -13,7 +13,7 @@ namespace UAT_Report.Dac
         public readonly IMongoCollection<SaleOrder> collection;
         public SaleOrderRepository(DbConfig dbConfig)
         {
-            var client = new MongoClient();
+            var client = new MongoClient(dbConfig.MongoDbConnectionString);
             var database = client.GetDatabase(dbConfig.MongoDbName);
             collection = database.GetCollection<SaleOrder>(dbConfig.SaleOrder);
         }
@@ -24,12 +24,11 @@ namespace UAT_Report.Dac
         public SaleOrder Get(Expression<Func<SaleOrder, bool>> expression)
             => collection.Find(expression).FirstOrDefault();
 
-
         public IEnumerable<SaleOrder> GetAllSaleOrder()
             => collection.Find(it => true).ToList();
 
         public void Update(SaleOrder document)
-        {
+        {                                                                                                                                                                                                                                                                                                                                                                                         
             var def = Builders<SaleOrder>.Update
                .Set(it => it.Status, document.Status)
                .Set(it => it.SONumber, document.SONumber)

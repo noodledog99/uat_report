@@ -7,7 +7,7 @@ using UAT_Report.Models;
 
 namespace UAT_Report.Dac
 {
-    interface ISaleOrderRepository
+    public interface ISaleOrderRepository
     {
         IEnumerable<SaleOrder> GetAllSaleOrder();
         SaleOrder Get(Expression<Func<SaleOrder, bool>> expression);
