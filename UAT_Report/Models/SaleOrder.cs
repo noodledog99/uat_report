@@ -12,9 +12,8 @@ namespace UAT_Report.Models
         [BsonId]
         public string SOId { get; set; }
 
-        
         public DateTime SODate { get; set; }
-        
+
         public string Status { get; set; }
         public string SONumber { get; set; }
         public string Description { get; set; }
@@ -22,10 +21,10 @@ namespace UAT_Report.Models
         public string SubServiceName { get; set; }
         public string CustomerNo { get; set; }
         public string CustomerName { get; set; }
-   
+
         public DateTime StartingDate { get; set; }
 
         public DateTime EndingDate { get; set; }
-        
+
     }
 }

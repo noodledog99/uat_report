@@ -21,7 +21,7 @@ namespace UAT_Report.Controllers
 
         public IActionResult SaleOrder()
         {
-            var ownerServiceSelectList = new List<SelectListItem> { new SelectListItem { Text = "--- Select ---", Value = "" } };
+            var ownerServiceSelectList = new List<SelectListItem>();
             var ownerServiceLst = collectionSubService
                 .GetAllSubService()
                 .Select(it => it.OwnerServiceName)
@@ -40,6 +40,7 @@ namespace UAT_Report.Controllers
                 model.SOId = Guid.NewGuid().ToString();
                 collectionSaleOrder.Create(model);
             }
+            ModelState.Clear();
             return View();
         }
 

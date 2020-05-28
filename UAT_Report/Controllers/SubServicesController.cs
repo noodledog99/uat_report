@@ -19,9 +19,8 @@ namespace UAT_Report.Controllers
 
         public IActionResult SubService()
         {
-                      return View();
+            return View();
         }
-        
 
         [HttpPost]
         public IActionResult SubService(SubService model)
@@ -31,10 +30,8 @@ namespace UAT_Report.Controllers
                 model.SubServiceId = Guid.NewGuid().ToString();
                 collection.Create(model);
             }
-            
-
+            ModelState.Clear();
             return View();
         }
-        
     }
 }
