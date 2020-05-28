@@ -1,0 +1,20 @@
+﻿@model UAT_Report.Models.SubService;
+@{
+    ViewData["Title"] = "SubService";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Insert Sub Service</h1>
+
+<form asp-action="SubService" method="post">
+    <div class="form-group">
+        <label for="OwnerServiceName">Owner Service</label>
+        <input type="text" asp-for="OwnerServiceName" name="ownerServiceName" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="SubServiceName">Sub Service</label>
+        <input type="text" asp-for="SubServiceName" name="subServiceName" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <button class="btn btn-primary">Cancel</button>
+</form>
