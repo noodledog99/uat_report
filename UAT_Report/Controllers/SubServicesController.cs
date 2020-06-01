@@ -17,13 +17,13 @@ namespace UAT_Report.Controllers
             this.collection = collection;
         }
 
-        public IActionResult SubService()
+        public IActionResult SubServiceInsert()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult SubService(SubService model)
+        public IActionResult SubServiceInsert(SubService model)
         {
             if (ModelState.IsValid)
             {

@@ -19,13 +19,13 @@ namespace UAT_Report.Controllers
             this.collectionSubService = collectionSubService;
         }
 
-        public IActionResult IndexSO()
+        public IActionResult SaleOrderIndex()
         {
              var saleorder = collectionSaleOrder.GetAllSaleOrder();
              return View(saleorder.ToList());
         }
        
-        public IActionResult SaleOrder()
+        public IActionResult SaleOrderInsert()
         {
             var ownerServiceSelectList = new List<SelectListItem>();
             var ownerServiceLst = collectionSubService
@@ -39,7 +39,7 @@ namespace UAT_Report.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaleOrder(SaleOrder model)
+        public IActionResult SaleOrderInsert(SaleOrder model)
         {
            
             if (ModelState.IsValid)
