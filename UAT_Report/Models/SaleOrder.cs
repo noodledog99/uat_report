@@ -25,6 +25,5 @@ namespace UAT_Report.Models
         [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
         public string Status { get; set; }
-
     }
 }

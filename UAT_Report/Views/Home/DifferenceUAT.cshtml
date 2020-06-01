@@ -1,0 +1,36 @@
+﻿@model UAT_Report.Models.ProgressUAT
+<div class="dash-box">
+    <h3 class="mb-3 font-weight-bold">Different UAT By Week</h3>
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Service Team</th>
+                        <th scope="col">Request UAT</th>
+                        <th scope="col">Recive UAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.ProgressDifferences)
+                        {
+                            <tr>
+                                <th scope="row">@item.ServiceTeam</th>
+                                <td>@item.RequestUAT</td>
+                                <td>@item.ReceiveUAT</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-8">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+        </div>
+    </div>
+</div>
+
+
