@@ -11,20 +11,20 @@ namespace UAT_Report.Models
     {
         [BsonId]
         public string SOId { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime SODate { get; set; }
-
-        public string Status { get; set; }
+        public string CustomerStatus { get; set; }
         public string SONumber { get; set; }
         public string Description { get; set; }
         public string OwnerService { get; set; }
         public string SubServiceName { get; set; }
         public string CustomerNo { get; set; }
         public string CustomerName { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime StartingDate { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
+        public string Status { get; set; }
 
     }
 }

@@ -13,5 +13,6 @@ namespace UAT_Report.Dac
         SaleOrder Get(Expression<Func<SaleOrder, bool>> expression);
         void Create(SaleOrder document);
         void Update(SaleOrder document);
+       
     }
 }

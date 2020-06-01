@@ -18,7 +18,16 @@ namespace UAT_Report.Controllers
             this.collectionSaleOrder = collectionSaleOrder;
             this.collectionSubService = collectionSubService;
         }
+        public IActionResult IndexSO()
+        {
+             var saleorder = collectionSaleOrder.GetAllSaleOrder();
+             return View(saleorder.ToList());
+           
 
+        }
+           
+
+       
         public IActionResult SaleOrder()
         {
             var ownerServiceSelectList = new List<SelectListItem>();

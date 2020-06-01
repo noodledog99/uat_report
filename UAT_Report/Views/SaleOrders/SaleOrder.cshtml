@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+    <p>
+        @Html.ActionLink("View Data", "IndexSO","SaleOrders")
+    </p>
 <div class="insertBox">
     <div class="insertBox-head">
         <h1>Insert SO UAT</h1>
@@ -19,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="Status">Status</label>
-                <select class="form-control" asp-for="Status" id="Status">
+                <select class="form-control" asp-for="CustomerStatus" id="CustomerStatus">
                     <option value="New Customer">New Customer</option>
                     <option value="New service">New service</option>
                     <option value="Renewal">Renewal</option>

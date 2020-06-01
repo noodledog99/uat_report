@@ -37,6 +37,9 @@
                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
                     </li>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "SaleOrders/IndexSO" ? "active" : "")">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="SaleOrders" asp-action="IndexSO">Summary</a>
+                    </li>
                     <li class="nav-item ml-auto @(ViewContext.RouteData.Values["Action"].ToString() == "SubService" ? "active" : "")">
                         <a class="nav-link text-dark" asp-area="" asp-controller="SubServices" asp-action="SubService">Insert Sub Service</a>
                     </li>
