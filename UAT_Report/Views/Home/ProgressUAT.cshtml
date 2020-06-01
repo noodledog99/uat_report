@@ -1,0 +1,85 @@
+﻿@model UAT_Report.Models.ProgressUAT
+<div class="dash-box">
+    <h3 class="mb-3 font-weight-bold">UAT This Week</h3>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Service Team</th>
+                        <th scope="col">Request UAT</th>
+                        <th scope="col" colspan="2">Recive UAT</th>
+                        <th scope="col" colspan="2">Pendding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.ProgressThisWeeks)
+                        {
+                            <tr>
+                                <td>@item.ServiceTeam</td>
+                                <td>@item.RequestUAT</td>
+                                <td>@item.NumberReciveUAT</td>
+                                <td>@item.PercentReciveUAT%</td>
+                                <td>@item.NumberPendding</td>
+                                <td>@item.PercentPendding%</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="font-weight-bold">Total</td>
+                        <td>@Model.TotalProgressThisWeeks.TotalRequestUAT</td>
+                        <td>@Model.TotalProgressThisWeeks.TotalNumberReceive</td>
+                        <td>@Model.TotalProgressThisWeeks.TotalPercentReceive%</td>
+                        <td>@Model.TotalProgressThisWeeks.TotalNumberPending</td>
+                        <td>@Model.TotalProgressThisWeeks.TotalPercentPending%</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="dash-box">
+    <h3 class="mb-3 font-weight-bold">UAT Last Week</h3>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Service Team</th>
+                        <th scope="col">Request UAT</th>
+                        <th scope="col" colspan="2">Recive UAT</th>
+                        <th scope="col" colspan="2">Pendding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.ProgressLastWeeks)
+                        {
+                            <tr>
+                                <td>@item.ServiceTeam</td>
+                                <td>@item.RequestUAT</td>
+                                <td>@item.NumberReciveUAT</td>
+                                <td>@item.PercentReciveUAT%</td>
+                                <td>@item.NumberPendding</td>
+                                <td>@item.PercentPendding%</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="font-weight-bold">Total</td>
+                        <td>@Model.TotalProgressLastWeeks.TotalRequestUAT</td>
+                        <td>@Model.TotalProgressLastWeeks.TotalNumberReceive</td>
+                        <td>@Model.TotalProgressLastWeeks.TotalPercentReceive%</td>
+                        <td>@Model.TotalProgressLastWeeks.TotalNumberPending</td>
+                        <td>@Model.TotalProgressLastWeeks.TotalPercentPending%</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

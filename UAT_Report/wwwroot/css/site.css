@@ -1,6 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 a.navbar-brand {
     white-space: normal;
@@ -47,8 +47,8 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    font-family: 'Sarabun', sans-serif !important;
-    background-color: #F5F9FA;
+    font-family: 'Quicksand', sans-serif !important;
+    background-color: #EEEEEE;
 }
 
 .footer {
@@ -61,35 +61,55 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-.active {
-    background: #71B346 !important;
+.active-nav {
+    /*background: #71B346 !important;*/
+    border-bottom: 2px solid #71B346;
+}
+
+.active-menu {
+    background-color: #A5CD93 !important;
+    color: white;
+}
+
+.bg-menu {
+    background-color: #71B346 !important;
+    color: white;
+    border-bottom: 1px solid #A5CD93 !important;
+    border-top: 1px solid #A5CD93 !important;
+}
+
+
+.navbar-light .navbar-nav .active-nav > .nav-link {
+    /*color: white !important;*/
+    color: #71B346 !important;
 }
 
 .bg-green {
-    background: #E2F0D9 !important;
+    background: #71B346 !important;
 }
 
 .nav-link {
-    color: white !important;
+    color: black;
+    padding-top: 15px;
 }
 
 .navbar {
-    padding: 0 !important;
+    padding: 1.05rem 1.25rem;
+    font-weight: 700;
 }
 
 ul.my-nav li {
-    border: 1px solid #71B346;
-    padding: 0 10px;
-    font-size: 18px;
+    padding: 5px 10px;
+    font-size: 16px;
 }
 
 .inet_banner {
-    background-color: #71B346;
+    /*background-color: #71B346;*/
     padding: 10px 30px;
 }
 
 .inet_logo {
-    max-width: 150px;
+    max-width: 115px;
 }
 
     .inet_logo img {
@@ -104,9 +124,126 @@ ul.my-nav li {
 
 .insertBox {
     padding: 20px 35px;
-    background-color:white;
+    background-color: white;
 }
 
 .btn {
     border-radius: 0;
+}
+
+
+
+/* highchart */
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table table {
+    font-family: 'Quicksand', sans-serif !important;
+    border-collapse: collapse;
+    border: 1px solid #EBEBEB;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+.highcharts-exporting-group, .highcharts-credits {
+    display: none !important;
+}
+
+.highcharts-figure {
+    margin: 0 !important;
+}
+
+/* end highchart */
+
+/* sidebar */
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+    #sidebar-wrapper .sidebar-heading {
+        padding: 0.875rem 1.25rem;
+        font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+        width: 15rem;
+    }
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+.sidebar-heading {
+    background-color: white !important;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar {
+        padding: 1.35rem 1.25rem;
+        font-weight: 600;
+    }
+}
+
+/* /sidebar */
+
+.dash-box {
+    background-color: white;
+    padding: 15px 25px;
+    margin-bottom: 15px;
 }

@@ -1,8 +1,60 @@
-﻿@{
+﻿@model UAT_Report.Models.ProgressUAT
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="dash-area mt-3">
+    <partial name="DifferenceUAT" model="Model" />
+    <partial name="ProgressUAT" model="Model" />
 </div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'Quicksand',
+                }
+            },
+            title: {
+                text: 'Different UAT by Week'
+            },
+            xAxis: {
+                categories:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.ServiceTeams)),
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                },
+            },
+            series: [{
+                name: 'Request UAT',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.RequestUAT)),
+                color: '#A5CD93'
+            }, {
+                name: 'Receive UAT',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.ReceiveUAT)),
+                color: '#71B346',
+            }]
+        });
+    </script>
+}

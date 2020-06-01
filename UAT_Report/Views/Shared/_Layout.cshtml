@@ -14,44 +14,61 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-        <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">rel="stylesheet">
     </environment>
+    <script src="https://kit.fontawesome.com/9e4462ff45.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <section class="banner">
-            <div class="inet_banner">
+    <div class="d-flex" id="wrapper">
+        <div class="bg-green border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">
                 <div class="inet_logo">
                     <img src="~/images/inetlogo.png" />
                 </div>
             </div>
-        </section>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-green border-bottom box-shadow mb-3">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1 my-nav">
-                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
-                    </li>
-                    <li class="nav-item ml-auto @(ViewContext.RouteData.Values["Action"].ToString() == "SubService" ? "active" : "")">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="SubServices" asp-action="SubService">Insert Sub Service</a>
-                    </li>
-                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "SaleOrder" ? "active" : "")">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="SaleOrders" asp-action="SaleOrder">Insert SO</a>
-                    </li>
-                </ul>
+            <div class="list-group list-group-flush bg-green">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action
+                   @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active-menu" : "bg-menu")">Dashboard</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <div class="list-group list-group-flush bg-green">
+                <a asp-area="" asp-controller="SubServices" asp-action="SubService" class="list-group-item list-group-item-action
+                   @(ViewContext.RouteData.Values["Action"].ToString() == "SubService" ? "active-menu" : "bg-menu")">Sub Service</a>
+            </div>
+            <div class="list-group list-group-flush bg-green">
+                <a asp-area="" asp-controller="SaleOrders" asp-action="SaleOrder" class="list-group-item list-group-item-action
+                   @(ViewContext.RouteData.Values["Action"].ToString() == "SaleOrder" ? "active-menu" : "bg-menu")">Sale Order</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                @*<button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active-nav" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                        </li>
+                        <li class="nav-item ml-auto @(ViewContext.RouteData.Values["Action"].ToString() == "SubService" ? "active-nav" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="SubServices" asp-action="SubService">Insert Sub Service</a>
+                        </li>
+                        <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "SaleOrder" ? "active-nav" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="SaleOrders" asp-action="SaleOrder">Insert SO</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -79,7 +96,17 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     @RenderSection("Scripts", required: false)
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </body>
 </html>

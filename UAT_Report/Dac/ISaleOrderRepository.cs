@@ -13,5 +13,9 @@ namespace UAT_Report.Dac
         SaleOrder Get(Expression<Func<SaleOrder, bool>> expression);
         void Create(SaleOrder document);
         void Update(SaleOrder document);
+        IEnumerable<ProgressOnWeek> GetSaleOrderThisWeek(IEnumerable<SaleOrder> saleOrders);
+        IEnumerable<ProgressOnWeek> GetSaleOrderLastWeek(IEnumerable<SaleOrder> saleOrders);
+        TotalUAT GetTotalOfProgressUAT(IEnumerable<ProgressOnWeek> progressOnWeeks);
+
     }
 }

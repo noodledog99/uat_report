@@ -7,13 +7,8 @@ namespace UAT_Report.Models
 {
     public enum Status
     {
-        NewCustomer,
-        NewService,
-        Renewal,
-        RenewalAndChange,
-        ChangeNewCustomer,
-        Change,
-        TerminateService,
-        TerminateCustomer
+        Pending,
+        Approve,
+        Success
     }
 }

@@ -35,13 +35,16 @@ namespace UAT_Report.Controllers
         [HttpPost]
         public IActionResult SaleOrder(SaleOrder model)
         {
+           
             if (ModelState.IsValid)
             {
                 model.SOId = Guid.NewGuid().ToString();
+                model.Status = Status.Pending.ToString();
+               
                 collectionSaleOrder.Create(model);
             }
             ModelState.Clear();
-            return View();
+            return RedirectToAction("SaleOrder");
         }
 
         [HttpGet]
