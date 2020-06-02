@@ -1,0 +1,104 @@
+﻿@model UAT_Report.Models.SaleOrder
+
+@{
+    ViewData["Title"] = "SaleOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  
+<div class="insertBox">
+    <div class="insertBox-head">
+        <h1>Insert SO UAT</h1>
+        <hr />
+    </div>
+    <div class="insertBox-body">
+        <form asp-action="SaleOrder" method="post">
+            <div class="form-group">
+                <label for="SODate">Date</label>
+                <input type="datetime-local" asp-for="SODate" name="soDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Status">Status</label>
+                <select class="form-control" asp-for="Status" id="Status">
+                    <option value="New Customer">New Customer</option>
+                    <option value="New service">New service</option>
+                    <option value="Renewal">Renewal</option>
+                    <option value="Renewal and Change">Renewal and Change</option>
+                    <option value="Change New Customer">Change New Customer</option>
+                    <option value="Change">Change</option>
+                    <option value="Terminate Service">Terminate Service</option>
+                    <option value="Terminate Customer">Terminate Customer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SONumber">SO No</label>
+                <input type="text" asp-for="SONumber" name="soNumber" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <input type="text" asp-for="Description" name="description" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="OwnerService">OwnerService</label>
+                        <select type="text" asp-for="OwnerService" name="ownerService" id="ownerService" asp-items="ViewBag.OwnerService" class="form-control">
+                            <option>--- Select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="SubServiceName">Sub Service Name</label>
+                        <select type="text" asp-for="SubServiceName" id="subServiceName" name="subServiceName" class="form-control">
+                            <option>--- Select ---</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CustomerNo">Customer No</label>
+                <input type="text" asp-for="CustomerNo" name="customerNo" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="CustomerName">Customer Name No</label>
+                <input type="text" asp-for="CustomerName" name="customerName" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="StartingDate">Starting Date</label>
+                        <input type="datetime-local" asp-for="StartingDate" name="startingDate" class="form-control">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="EndingDate">Ending Date</label>
+                        <input type="datetime-local" asp-for="EndingDate" name="endingDate" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ownerService").change(function (e) {
+                e.preventDefault()
+                var ownerName = $(this).val();
+                var url = '@Url.Action("GetSelectSubServices", "SaleOrders")'
+                $.get(url, { owner: ownerName }).then((res) => {
+                    $('#subServiceName').empty().append('<option>--- Select ---</option>');
+                    $.each(res, function (data, value) {
+                        console.log(value)
+                        $('#subServiceName').append($('<option></option>').val(value).html(value))
+                    });
+                })
+            });
+        });
+    </script>
+}
