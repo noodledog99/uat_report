@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -71,6 +72,13 @@ namespace UAT_Report.Controllers
                 })
             );
             return Json(subServices);
+        }
+
+        [HttpGet]
+        public IActionResult SaleOrderServiceView(string serviceName)
+        {
+            var saleOrders = collectionSaleOrder.GetAllSaleOrder().Where(it => it.OwnerService == serviceName).ToList();
+            return View(saleOrders);
         }
     }
 }
