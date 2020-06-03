@@ -40,53 +40,5 @@ namespace UAT_Report.Dac
                .Set(it => it.CustomerName, document.CustomerName);
             collection.UpdateOne(it => it.SOId == document.SOId, def);
         }
-
-        public IEnumerable<ProgressOnWeek> GetSaleOrderThisWeek(IEnumerable<SaleOrder> saleOrders)
-        {
-            DateTime startOfWeek = DateTime.Today.AddDays(
-               (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek - (int)DateTime.Today.DayOfWeek);
-            DateTime endOfWeek = startOfWeek.AddDays(6);
-            return GetDataByDateTime(saleOrders, startOfWeek, endOfWeek).ToList();
-        }
-
-        public IEnumerable<ProgressOnWeek> GetSaleOrderLastWeek(IEnumerable<SaleOrder> saleOrders)
-        {
-            DateTime startOfLastWeek = DateTime.Now.AddDays(-(int)(DateTime.Today.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek) - 7);
-            DateTime endOfLastWeek = startOfLastWeek.AddDays(6);
-            return GetDataByDateTime(saleOrders, startOfLastWeek, endOfLastWeek).ToList();
-        }
-
-        private IEnumerable<ProgressOnWeek> GetDataByDateTime(IEnumerable<SaleOrder> saleorders, DateTime start, DateTime end)
-        {
-            var saleorderByDateTime = saleorders.Where(it => it.SODate >= start && it.SODate < end)
-            .GroupBy(it => it.OwnerService)
-            .Select(it => new ProgressOnWeek
-            {
-                ServiceTeam = it.Key,
-                RequestUAT = it.Count(),
-                NumberReciveUAT = it.Where(s => s.Status == Status.Success.ToString()).Count(),
-                PercentReciveUAT = (int)Math.Round((decimal)it.Where(s => s.Status == Status.Success.ToString()).Count() * 100 / it.Count()),
-                NumberPendding = it.Where(s => s.Status == Status.Pending.ToString()).Count(),
-                PercentPendding = (int)Math.Round((decimal)it.Where(s => s.Status == Status.Pending.ToString()).Count() * 100 / it.Count())
-            })
-            .ToList();
-
-            return saleorderByDateTime;
-        }
-
-        public TotalUAT GetTotalOfProgressUAT(IEnumerable<ProgressOnWeek> progressOnWeeks)
-        {
-            var calPercentReceive = (decimal)progressOnWeeks.Sum(it => it.NumberReciveUAT) * 100 / progressOnWeeks.Sum(it => it.RequestUAT);
-            var calPercentPending = (decimal)progressOnWeeks.Sum(it => it.NumberPendding) * 100 / progressOnWeeks.Sum(it => it.RequestUAT);
-
-            return new TotalUAT
-            {
-                TotalRequestUAT = progressOnWeeks.Sum(it => it.RequestUAT),
-                TotalNumberReceive = progressOnWeeks.Sum(it => it.NumberReciveUAT),
-                TotalPercentReceive = Math.Round(calPercentReceive),
-                TotalNumberPending = progressOnWeeks.Sum(it => it.NumberPendding),
-                TotalPercentPending = Math.Round(calPercentPending),
-        };
-        }
     }
 }

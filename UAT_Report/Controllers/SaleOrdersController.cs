@@ -42,7 +42,6 @@ namespace UAT_Report.Controllers
         [HttpPost]
         public IActionResult SaleOrderInsert(SaleOrder model)
         {
-           
             if (ModelState.IsValid)
             {
                 model.SOId = Guid.NewGuid().ToString();
@@ -51,7 +50,7 @@ namespace UAT_Report.Controllers
                 collectionSaleOrder.Create(model);
             }
             ModelState.Clear();
-            return RedirectToAction("SaleOrder");
+            return RedirectToAction("SaleOrderInsert");
         }
 
         [HttpGet]
