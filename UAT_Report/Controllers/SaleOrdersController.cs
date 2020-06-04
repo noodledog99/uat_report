@@ -51,7 +51,6 @@ namespace UAT_Report.Controllers
         [HttpPost]
         public IActionResult SaleOrderInsert(SaleOrder model)
         {
-           
             if (ModelState.IsValid)
             {
                 model.SOId = Guid.NewGuid().ToString();

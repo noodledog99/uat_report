@@ -10,6 +10,7 @@ using UAT_Report.Models;
 using Newtonsoft.Json;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
 using System.Globalization;
+using UAT_Report.Logics;
 
 namespace UAT_Report.Controllers
 {
@@ -18,11 +19,14 @@ namespace UAT_Report.Controllers
     {
         private readonly ISaleOrderRepository collectionSaleOrder;
         private readonly ISubServiceRepository collectionSubService;
+        private SaleOrderFunctions funcSale;
 
-        public HomeController(ISaleOrderRepository collectionSaleOrder, ISubServiceRepository collectionSubService)
+        public HomeController(ISaleOrderRepository collectionSaleOrder, ISubServiceRepository collectionSubService )
         {
+            funcSale = new SaleOrderFunctions(collectionSubService, collectionSaleOrder);
             this.collectionSaleOrder = collectionSaleOrder;
             this.collectionSubService = collectionSubService;
+            
         }
 
         public IActionResult Index()
@@ -30,19 +34,13 @@ namespace UAT_Report.Controllers
             var serviceTeams = new List<string>();
             var requestUAT = new List<int>();
             var receiveUAT = new List<int>();
-            var saleorders = collectionSaleOrder.GetAllSaleOrder();
+           
+            var uatThisWeek = funcSale.GetSaleOrderThisWeek().ToList();
+            var uatLastWeek = funcSale.GetSaleOrderLastWeek().ToList();
 
-            var requestUATs = saleorders
-                .GroupBy(it => it.OwnerService)
-                .Select(it => new DifferenceUAT
-                {
-                    ServiceTeam = it.Key,
-                    RequestUAT = it.Count(),
-                    ReceiveUAT = it.Where(s => s.Status == Status.Success.ToString()).Count()
-                })
-                .ToList();
-
-            requestUATs.ForEach(it =>
+            var requestUATs = funcSale.GetDifferenceUATDataTable().ToList();
+            var differenceUATGraph = funcSale.GetDifferenceUATDataGraph(uatThisWeek).ToList();
+            differenceUATGraph.ForEach(it =>
             {
                 serviceTeams.Add(it.ServiceTeam);
                 requestUAT.Add(it.RequestUAT);
@@ -53,18 +51,17 @@ namespace UAT_Report.Controllers
             ViewBag.RequestUAT = requestUAT;
             ViewBag.ReceiveUAT = receiveUAT;
 
-            var uatThisWeek = collectionSaleOrder.GetSaleOrderThisWeek(saleorders).ToList();
-            var uatLastWeek = collectionSaleOrder.GetSaleOrderLastWeek(saleorders).ToList();
+           
 
             var ProgressUAT = new ProgressUAT
             {
                 ProgressThisWeeks = uatThisWeek,
                 ProgressLastWeeks = uatLastWeek,
                 ProgressDifferences = requestUATs,
-                TotalProgressThisWeeks = collectionSaleOrder.GetTotalOfProgressUAT(uatThisWeek),
-                TotalProgressLastWeeks = collectionSaleOrder.GetTotalOfProgressUAT(uatLastWeek),
+                TotalProgressThisWeeks = funcSale.GetTotalOfProgressUAT(uatThisWeek),
+                TotalProgressLastWeeks = funcSale.GetTotalOfProgressUAT(uatLastWeek),
             };
-            
+
             return View(ProgressUAT);
         }
 
