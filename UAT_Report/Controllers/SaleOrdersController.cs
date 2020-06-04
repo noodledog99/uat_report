@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using UAT_Report.Dac;
 using UAT_Report.Models;
 
@@ -24,6 +25,14 @@ namespace UAT_Report.Controllers
         {
              var saleorder = collectionSaleOrder.GetAllSaleOrder();
              return View(saleorder.ToList());
+        }
+
+        [HttpGet("{ownerService}")]
+
+        public IActionResult SaleOrderIndex(string ownerService)
+        {
+            var subservice = collectionSaleOrder.GetAllSaleOrder().Where(io => io.OwnerService == ownerService);
+            return View(subservice.ToList());
         }
        
         public IActionResult SaleOrderInsert()
@@ -46,12 +55,11 @@ namespace UAT_Report.Controllers
             if (ModelState.IsValid)
             {
                 model.SOId = Guid.NewGuid().ToString();
-                model.Status = Status.Pending.ToString();
-               
+                model.Status = Status.Pending.ToString();  
                 collectionSaleOrder.Create(model);
             }
             ModelState.Clear();
-            return RedirectToAction("SaleOrder");
+            return RedirectToAction("SaleOrderInsert");
         }
 
         [HttpGet]

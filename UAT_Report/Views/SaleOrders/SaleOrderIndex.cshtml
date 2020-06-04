@@ -29,9 +29,11 @@
 </style>
 
 <h1>UAT Summary</h1>
-<div class="table-wrapper-scroll-y  ">
-  
-    <table  id="example" cellspacing="0"  class="table table-striped table-success mb-0 table-bordered table-sm " width="100%">
+<p>
+    @Html.ActionLink("Example", "SubserviceIndex","SaleOrders")
+</p>
+<div>
+    <table id="example" cellspacing="0" class="table table-striped table-success mb-0 table-bordered table-sm " width="100%">
         <thead>
             <tr class="bg-success" style="color:white">
                 <th scope="col">Date</th>
@@ -88,8 +90,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.EndingDate)
+                    </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
+                        @Html.DisplayFor(modelItem => item.SONumber)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
@@ -110,24 +113,25 @@
             }
         </tbody>
         <tfoot>
+
         </tfoot>
     </table>
 </div>
 
 @section Scripts{
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript"> 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#example').DataTable(
                 {
                     searching: false,
                     ordering: false,
-                    "scrollY": "400px",
-                    "scrollCollapse": false,
+                    "scrollY": "875px",
+                    "scrollX": 200,
                 }
-                    );
+            );
         });
     </script>
 }

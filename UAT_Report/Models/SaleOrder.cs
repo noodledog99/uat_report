@@ -24,6 +24,12 @@ namespace UAT_Report.Models
         public DateTime StartingDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
+        
+        [DataType(DataType.Date)]
+        public DateTime FollowUat { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Receive { get; set; }
+        public string Remark { get; set; }
         public string Status { get; set; }
     }
 }

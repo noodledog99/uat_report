@@ -16,7 +16,8 @@
                         foreach (var item in Model.ProgressDifferences)
                         {
                             <tr>
-                                <th scope="row">@item.ServiceTeam</th>
+                                <th scope="row"> @Html.ActionLink(@item.ServiceTeam, "SaleOrderIndex", "SaleOrders",new { ownerService = @item.ServiceTeam },null)
+                              </th>
                                 <td>@item.RequestUAT</td>
                                 <td>@item.ReceiveUAT</td>
                             </tr>
